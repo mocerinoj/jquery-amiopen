@@ -1,7 +1,7 @@
 jquery-amiopen
 ==============
 
-  //hours
+		//hours
 		var myhours=	[ // sun through sat
 			[0,0],
 			[800,1700],
