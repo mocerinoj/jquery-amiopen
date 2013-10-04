@@ -23,12 +23,6 @@ jquery-amiopen
 			daysToShow: "*",
 			showClosedDays: false,
 			display:function(hours){
-				/*return $("<input />",{
-					name : "Day[]",
-					type : "checkbox",
-					value: $.fn.amiopen.format("ddd",hours.day),
-					//$.fn.amiopen.format("dddd",hours.day)
-				}).after("<span/>");*/
 				return '<input type="checkbox" name="Day[]" value="'+$.fn.amiopen.format("ddd",hours.day)+'"/>'+$.fn.amiopen.format("dddd",hours.day)
 			}
 		});
