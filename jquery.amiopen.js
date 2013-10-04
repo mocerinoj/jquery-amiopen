@@ -1,4 +1,4 @@
-/* jquery.amiopen 1.0.0, joe mocerino */
+/* jquery.amiopen 1.0.1, joe mocerino */
 (function( $ ) {
 
 	$.fn.amiopen = function( options ) {
@@ -71,11 +71,15 @@
 				var date = settings.daysToShow == "*" ? i : today.getDay()+i;
 				//figure out to hide
 				if((!settings.showClosedDays&&(settings.hours[date][0]>0||settings.hours[date][1]>0))||settings.showClosedDays){
-					$this.append(settings.display({
-						"day":settings.weekdays[date],
-						"open":settings.hours[date][0],
-						"close":settings.hours[date][1]
-					}));
+					if((settings.hours[date][0]==0&&settings.hours[date][1]==0)){
+						$this.append(settings.openNow(eval("settings.statusWords."+isOpen)));
+					}else{
+						$this.append(settings.display({
+							"day":settings.weekdays[date],
+							"open":settings.hours[date][0],
+							"close":settings.hours[date][1]
+						}));
+					}
 				}
 			}
 
@@ -90,10 +94,10 @@
 	 		"dd":value.toString().substring(0,2),
 	 		"d":value.toString().substring(0,1),
 	 		"H":value,
-	 		"h":value < 1200 ? value.toString().substring(0,value.toString().length-2) : (value.toString().substring(0,value.toString().length-2))-12,
+	 		"h":value <= 1200 ? value.toString().substring(0,value.toString().length-2) : (value.toString().substring(0,value.toString().length-2))-12,
 	 		"nn":value.toString().substring(value.toString().length-2),
-	 		"tt":value <= 1200 ? "am" : "pm",
-	 		"t":value <= 1200 ? "a" : "p"
+	 		"tt":value < 1200 ? "am" : "pm",
+	 		"t":value < 1200 ? "a" : "p"
 	 	}
 	 	return format.replace(/dddd|ddd|dd|d|tt|t|H|h|nn/g,function(matched){
 	 		return map[matched];
